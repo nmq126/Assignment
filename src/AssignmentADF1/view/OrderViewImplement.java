@@ -2,6 +2,7 @@ package AssignmentADF1.view;
 
 import AssignmentADF1.controller.OrderController;
 import AssignmentADF1.controller.OrderControllerImplement;
+import AssignmentADF1.util.Validator;
 
 import java.util.Scanner;
 
@@ -27,9 +28,12 @@ public class OrderViewImplement implements OrderView {
             System.out.println("6. Update order information.");
             System.out.println("7. Exit.");
             System.out.println("---------------------------------");
-            System.out.println("Please enter your choice (1-7): ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            String strChoice;
+            do {
+                System.out.println("Please enter your choice (1-7): ");
+                strChoice = scanner.nextLine();
+            }while (!Validator.isInt(strChoice));
+            int choice = Integer.parseInt(strChoice);
             switch (choice) {
                 case 1:
                     orderController.createNewOrder();
@@ -51,8 +55,9 @@ public class OrderViewImplement implements OrderView {
                     break;
                 case 7:
                     System.out.println("Goodbye!");
+                    break;
                 default:
-                    System.out.println("Invalid choice. Please choose between 1 and ");
+                    System.err.println("Invalid choice. Please choose an integer between 1 and 7");
                     break;
             }
             if (choice == 7) {
